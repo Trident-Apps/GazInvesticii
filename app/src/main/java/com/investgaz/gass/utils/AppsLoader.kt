@@ -12,40 +12,40 @@ import kotlinx.coroutines.cancel
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
-import kotlinx.coroutines.flow.flow
 
 class AppsLoader(activity: Activity) {
-    private val TAG = "customTag"
     private val pref = activity.getSharedPreferences("pref", Context.MODE_PRIVATE)
-    private var isAppsStarted: Boolean = false
 
     fun getApps(activity: Activity): Flow<MutableMap<String, Any>?> = callbackFlow {
         Log.d("customTagApps", " in apps")
-            AppsFlyerLib.getInstance()
-                .init(
-                    activity.getString(R.string.apps_dev_key),
-                    object : AppsFlyerConversionListener {
-                        @SuppressLint("CommitPrefEdits")
-                        override fun onConversionDataSuccess(data: MutableMap<String, Any>?) {
-                            trySend(data)
-                            Log.d("customTagApps", " apps success")
-                            pref.edit().putBoolean("isAppsStarted", true)
-
+        AppsFlyerLib.getInstance()
+            .init(
+                activity.getString(R.string.apps_dev_key),
+                object : AppsFlyerConversionListener {
+                    @SuppressLint("CommitPrefEdits")
+                    override fun onConversionDataSuccess(data: MutableMap<String, Any>?) {
+                        trySend(data)
+                        Log.d("customTagApps", " apps success")
+                        pref.edit {
+                            putBoolean("isStarted", true)
                         }
+                        Log.d("customTagApps", "apps success is ${pref.getBoolean("isStarted", false).toString()}")
 
-                        override fun onConversionDataFail(p0: String?) {
-                            trySend(null)
-                            Log.d("customTagApps", " apps fail")
-                        }
+                    }
 
-                        override fun onAppOpenAttribution(p0: MutableMap<String, String>?) {}
+                    override fun onConversionDataFail(p0: String?) {
+                        trySend(null)
+                        Log.d("customTagApps", " apps fail")
+                    }
 
-                        override fun onAttributionFailure(p0: String?) {}
+                    override fun onAppOpenAttribution(p0: MutableMap<String, String>?) {}
 
-                    },
-                    activity
-                )
-            AppsFlyerLib.getInstance().start(activity)
+                    override fun onAttributionFailure(p0: String?) {}
+
+                },
+                activity
+            )
+        AppsFlyerLib.getInstance().start(activity)
         awaitClose {
             cancel()
         }

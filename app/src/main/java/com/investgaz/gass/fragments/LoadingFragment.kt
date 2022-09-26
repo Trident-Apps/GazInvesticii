@@ -43,16 +43,22 @@ class LoadingFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val pref = requireActivity().getSharedPreferences("pref", Context.MODE_PRIVATE)
         val appsLoader = AppsLoader(requireActivity())
-        if (!checker.isDeviceSecured(requireActivity())) {
+        val smth: Boolean = true
+        if (checker.isDeviceSecured(requireActivity()))
+        if (smth)
+        {
             startPresentation()
             Log.d("customTag", "checked security")
         } else {
-            lifecycleScope.launch(Dispatchers.IO) {
-                savedUrl = pref.getString("savedUrl", "").toString()
-                if (savedUrl == "") {
-                    Log.d("customTag", "checked saved url")
+//            lifecycleScope.launch(Dispatchers.IO) {
+            savedUrl = pref.getString("savedUrl", "").toString()
+            if (savedUrl == "") {
+                Log.d("customTag", "checked saved url")
 
-                    if (!pref.getBoolean("isAppsStarted", false)) {
+
+                Log.d("customTag", pref.getBoolean("isStarted", false).toString())
+                    lifecycleScope.launch(Dispatchers.IO) {
+
                         appsLoader.getApps(requireActivity()).collect {
                             Log.d("customTag", "started apps")
                             url = builder.buildUrl(it, requireActivity())
@@ -60,27 +66,29 @@ class LoadingFragment : Fragment() {
                             lifecycleScope.launch(Dispatchers.Main) {
                                 startWeb(url)
                                 Log.d("customTag", "started web from new")
+
                             }
                         }
                     }
-                } else {
-                    lifecycleScope.launch(Dispatchers.Main) {
-                        startWeb(savedUrl)
-                        Log.d("customTag", "started web from saved $savedUrl")
-                    }
-                }
+
+
+            } else {
+//                    lifecycleScope.launch(Dispatchers.Main) {
+                startWeb(savedUrl)
+                Log.d("customTag", "started web from saved $savedUrl")
+//                    }
             }
+//            }
         }
     }
 
-//    override fun onResume() {
-//        super.onResume()
-//        val pref = requireActivity().getSharedPreferences("pref", Context.MODE_PRIVATE)
-//        savedUrl = pref.getString("savedUrl", "").toString()
-//        if (!savedUrl == "") {
-//            startWeb(savedUrl)
-//        }
-//    }
+    override fun onResume() {
+        super.onResume()
+        val pref = requireActivity().getSharedPreferences("pref", Context.MODE_PRIVATE)
+        if (pref.getBoolean("isStarted", false)) {
+            startWeb(savedUrl)
+        }
+    }
 
     private fun startPresentation() {
         with(Intent(requireActivity(), PresentationActivity::class.java)) {

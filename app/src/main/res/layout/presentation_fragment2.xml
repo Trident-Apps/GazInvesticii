@@ -6,26 +6,26 @@
     android:background="@drawable/tutorial_screen">
 
     <TextView
-        android:background="@drawable/text_background"
-        style="@style/title_text_style"
-        android:gravity="center"
         android:id="@+id/title_text"
+        style="@style/title_text_style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextVie2w"
+        android:background="@drawable/text_background"
+        android:gravity="center"
+        android:text="@string/title2_text"
         app:layout_constraintBottom_toTopOf="@id/description_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:background="@drawable/text_background"
-        style="@style/description_text_style"
-        android:gravity="center"
         android:id="@+id/description_text"
+        style="@style/description_text_style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:background="@drawable/text_background"
+        android:gravity="center"
+        android:text="@string/description2_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

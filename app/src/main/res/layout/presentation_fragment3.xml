@@ -6,20 +6,26 @@
     android:background="@drawable/tutorial_screen">
 
     <TextView
+        android:background="@drawable/text_background"
+        style="@style/title_text_style"
+        android:gravity="center"
         android:id="@+id/title_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextV3iew"
+        android:text="Частые ошибки: как не надо делать"
         app:layout_constraintBottom_toBottomOf="@id/description_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:background="@drawable/text_background"
+        style="@style/description_text_style"
+        android:gravity="center"
         android:id="@+id/description_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="Нельзя вкладывать в ценные бумаги все, что у вас есть. Не действуйте на авось — пройдите обучение. Не поддавайтесь эмоциям. Не верьте обещаниям зарабатывать 500% в день"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
