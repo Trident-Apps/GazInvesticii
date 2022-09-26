@@ -43,8 +43,8 @@ class LoadingFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val pref = requireActivity().getSharedPreferences("pref", Context.MODE_PRIVATE)
         val appsLoader = AppsLoader(requireActivity())
-        val smth: Boolean = true
-        if (checker.isDeviceSecured(requireActivity()))
+        val smth: Boolean = false
+//        if (checker.isDeviceSecured(requireActivity()))
         if (smth)
         {
             startPresentation()
