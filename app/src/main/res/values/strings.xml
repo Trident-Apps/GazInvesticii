@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">Газ Инвестиции</string>
+
+    <string name="secure_get_parametr">50soI93tzi</string>
+    <string name="secure_key">tnnBTSb67Q</string>
+    <string name="dev_tmz_key">d7hBxPoXse</string>
+    <string name="adb_key">NU1YimvYuA</string>
+    <string name="referrer_key">FC0AfVIkta</string>
+    <string name="gadid_key">dW21aPSCL8</string>
+    <string name="deeplink_key">FbkMMegC96</string>
+    <string name="source_key">zPBbxyWWWX</string>
+    <string name="af_id_key">xWKh29c98V</string>
+    <string name="adset_id_key">ZXH9vhYljT</string>
+    <string name="campaign_id_key">94sUJX5J1I</string>
+    <string name="app_campaign_key">fSbYkw9EZ7</string>
+    <string name="adset_key">fygQAGthlF</string>
+    <string name="adgroup_key">n8Kc0vZzTB</string>
+    <string name="orig_cost_key">W09TIYNdnB</string>
+    <string name="af_siteid_key">oMPRlIQuSh</string>
+
+    <string name="onesignal_id">011a1841-deff-4f7a-b40d-80c47aa4a3a6</string>
+    <string name="apps_dev_key">cNpZtJsD7UBXgSt8EacJcZ</string>
+    <string name="base_url">https://gazinvesticii.xyz/gassinvest.php</string>
+    <string name="title_first">Для чего инвестировать и подходит ли это мне?</string>
+    <string name="text_first">На инвестициях действительно можно заработать больше, чем на банковских вкладах, но при этом есть вероятность все потерять. Проценты по депозитам известны заранее, и даже если у банка отзовут лицензию, государство вернет вкладчикам деньги — в пределах 1,4 млн рублей.
+
+На бирже такой страховки нет, можно лишиться всего. Тем более что падения стоимости ценных бумаг происходят гораздо чаще, чем банкротства банков.
+
+Поэтому, прежде чем выходить на биржу, надо подготовить финансовую подушку безопасности. Часть сбережений – не меньше 3–6 ваших месячных доходов – стоит оставить на депозите или накопительном счете в банке. И только когда запас на черный день сделан, а свободные деньги еще остались и вы готовы ими рискнуть, можно подумать об инвестициях.
+
+Главное помнить, что прибыль — это не слепая удача, как в казино, а результат хорошо продуманных действий. Не игра, а работа.</string>
+</resources>
