@@ -20,8 +20,8 @@ class UriBuilder {
             appendQueryParameter(activity.getString(R.string.dev_tmz_key), TimeZone.getDefault().id)
             appendQueryParameter(activity.getString(R.string.gadid_key), gadId)
             appendQueryParameter(
-                activity.getString(R.string.source_key),
-                data?.get("media_source").toString()
+                "zPBbxyWWWX",
+                "null"
             )
                 appendQueryParameter(
                     activity.getString(R.string.af_id_key),
