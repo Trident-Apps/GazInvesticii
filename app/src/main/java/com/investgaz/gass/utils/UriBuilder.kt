@@ -19,14 +19,14 @@ class UriBuilder {
             )
             appendQueryParameter(activity.getString(R.string.dev_tmz_key), TimeZone.getDefault().id)
             appendQueryParameter(activity.getString(R.string.gadid_key), gadId)
+            appendQueryParameter(activity.getString(R.string.deeplink_key), "null")
             appendQueryParameter(
-                "zPBbxyWWWX",
-                "null"
+                activity.getString(R.string.source_key), data?.get("media_source").toString()
             )
-                appendQueryParameter(
-                    activity.getString(R.string.af_id_key),
-                    AppsFlyerLib.getInstance().getAppsFlyerUID(activity.applicationContext)
-                )
+            appendQueryParameter(
+                activity.getString(R.string.af_id_key),
+                AppsFlyerLib.getInstance().getAppsFlyerUID(activity.applicationContext)
+            )
             appendQueryParameter(
                 activity.getString(R.string.adset_id_key),
                 data?.get(DATA_ADSET_ID).toString()
