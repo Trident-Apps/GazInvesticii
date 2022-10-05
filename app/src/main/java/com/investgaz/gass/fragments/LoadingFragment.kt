@@ -1,9 +1,10 @@
 package com.investgaz.gass.fragments
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
+import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,20 +12,18 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.investgaz.gass.InvestApplication
 import com.investgaz.gass.R
 import com.investgaz.gass.activities.PresentationActivity
 import com.investgaz.gass.databinding.LoaddingFragmentBinding
 import com.investgaz.gass.utils.AppsLoader
-import com.investgaz.gass.utils.Checker
 import com.investgaz.gass.utils.UriBuilder
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class LoadingFragment : Fragment() {
     private var _binding: LoaddingFragmentBinding? = null
     private val binding get() = _binding!!
-    private val checker = Checker()
 
     private lateinit var savedUrl: String
     lateinit var url: String
@@ -43,42 +42,23 @@ class LoadingFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val pref = requireActivity().getSharedPreferences("pref", Context.MODE_PRIVATE)
         val appsLoader = AppsLoader(requireActivity())
-        val smth: Boolean = false
-//        if (checker.isDeviceSecured(requireActivity()))
-        if (smth)
-        {
+        if (checkADB(requireActivity()) != "1") {
             startPresentation()
-            Log.d("customTag", "checked security")
         } else {
-//            lifecycleScope.launch(Dispatchers.IO) {
             savedUrl = pref.getString("savedUrl", "").toString()
             if (savedUrl == "") {
-                Log.d("customTag", "checked saved url")
 
-
-                Log.d("customTag", pref.getBoolean("isStarted", false).toString())
-                    lifecycleScope.launch(Dispatchers.IO) {
-
-                        appsLoader.getApps(requireActivity()).collect {
-                            Log.d("customTag", "started apps")
-                            url = builder.buildUrl(it, requireActivity())
-                            Log.d("customTag", "created url $url")
-                            lifecycleScope.launch(Dispatchers.Main) {
-                                startWeb(url)
-                                Log.d("customTag", "started web from new")
-
-                            }
+                lifecycleScope.launch(Dispatchers.IO) {
+                    appsLoader.getApps(requireActivity()).collect {
+                        url = builder.buildUrl(it, requireActivity(), InvestApplication.gadId)
+                        lifecycleScope.launch(Dispatchers.Main) {
+                            startWeb(url)
                         }
                     }
-
-
+                }
             } else {
-//                    lifecycleScope.launch(Dispatchers.Main) {
                 startWeb(savedUrl)
-                Log.d("customTag", "started web from saved $savedUrl")
-//                    }
             }
-//            }
         }
     }
 
@@ -88,6 +68,10 @@ class LoadingFragment : Fragment() {
         if (pref.getBoolean("isStarted", false)) {
             startWeb(savedUrl)
         }
+    }
+
+    private fun checkADB(activity: Activity): String {
+        return Settings.Global.getString(activity.contentResolver, Settings.Global.ADB_ENABLED)
     }
 
     private fun startPresentation() {
